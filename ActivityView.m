@@ -48,7 +48,20 @@ RCT_EXPORT_METHOD(show:(NSDictionary *)args)
     
     // Display the Activity View
     UIViewController *ctrl = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    [ctrl presentViewController:activityView animated:YES completion:nil];
+
+    /*
+     * fix crash on iPad iOS 8.4
+     * centering the share popup on screen without any arrows.
+     */
+    if ([activityView respondsToSelector:@selector(popoverPresentationController)]) {
+        CGRect sourceRect = CGRectMake(ctrl.view.center.x, ctrl.view.center.y, 1, 1);
+        activityView.popoverPresentationController.sourceView = ctrl.view;
+        activityView.popoverPresentationController.sourceRect = sourceRect;
+        activityView.popoverPresentationController.permittedArrowDirections = 0;
+        [ctrl presentViewController:activityView animated:YES completion:nil];
+    } else {
+        [ctrl presentViewController:activityView animated:YES completion:nil];
+    }
 }
 
 @end
