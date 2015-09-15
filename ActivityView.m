@@ -1,5 +1,8 @@
 #import "ActivityView.h"
 #import "RCTLog.h"
+#import "RCTBridge.h"
+#import "RCTSparseArray.h"
+#import "RCTUIManager.h"
 
 @implementation ActivityView
 
