@@ -11,7 +11,7 @@ var {
 
 var NativeActivityView = NativeModules.ActivityView;
 /* eslint-disable no-unused-vars */
-var invariant = require('invariant');
+var invariant = React.invariant;
 /* eslint-enable no-unused-vars */
 
 /**
